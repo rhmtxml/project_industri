@@ -1,9 +1,11 @@
 <?php
 
+
+use App\Http\Controllers\RelasiController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\IndustriController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\BiodatasController;
-use App\Models\biodata;
 use App\Models\siswa;
 use Illuminate\Support\Facades\Route;
 
@@ -163,15 +165,7 @@ $setelahdiskon = $total * (1 - ($diskon10 / 100));
 //     // return view('halaman_post', compact('post'));
 // });
 
-Route::get('siswa' , function () {
 
-    // return $siswa = siswa::all();
-    
-    $siswa = siswa::all();
-
-    return view('halaman_siswa', compact('siswa'));
-
-});
 // Route::get('biodata' , function () {
 
 //     $biodata = new biodata;
@@ -191,10 +185,35 @@ Route::get('siswa' , function () {
 
 // });
 
-Route::get('post', [PostsController::class, 'tampil']);
-Route::get('biodata', [BiodatasController::class, 'nampil']);
+
+// Route::get('post', [PostsController::class, 'tampil']);
+Route::resource('post', PostsController::class);    
+Route::resource('biodata', BiodatasController::class);
+
+
+
+
+
+
+
+
+
+
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 route::get('/product', [ProductController::class, 'index'])->name('product');
+route::get('/industri', [IndustriController::class, 'index'])->name('industri');
+
+
+
+
+
+
+Route::get('/one-to-one', [RelasiController::class, 'oneToOne']);
+
+
+Route::get('/one-to-many', [RelasiController::class, 'oneToMany']);
