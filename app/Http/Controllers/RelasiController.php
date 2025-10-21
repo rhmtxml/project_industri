@@ -18,4 +18,15 @@ class RelasiController extends Controller
         $dosens = Dosen::with('mahasiswas')->get();
         return view('relasi.one_to_many', compact('dosens'));
     }
+    public function manyToMany()
+    {
+        $mahasiswas = Mahasiswa::with('hobis')->get();
+        return view('relasi.many_to_many', compact('mahasiswas'));
+    }
+    public function eloquent()
+    {
+        $mahasiswa = Mahasiswa::with('wali', 'dosen', 'hobis')->get();
+
+        return view('relasi.eloquent', compact('mahasiswa'));
+    }
 }

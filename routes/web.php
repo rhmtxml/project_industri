@@ -7,6 +7,7 @@ use App\Http\Controllers\IndustriController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\BiodatasController;
 use App\Models\siswa;
+use App\Models\Hobi;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -217,3 +218,13 @@ Route::get('/one-to-one', [RelasiController::class, 'oneToOne']);
 
 
 Route::get('/one-to-many', [RelasiController::class, 'oneToMany']);
+Route::get('/many-to-many', [RelasiController::class, 'manyToMany']);
+
+
+Route::get('/hobi/bola', function () {
+    $hobi = Hobi::where('nama_hobi', 'Bermain Bola')->first();
+    foreach ($hobi->mahasiswas as $mhs) {
+        echo $mhs->nama . '<br>';
+    }
+});
+Route::get('eloquent', [RelasiController::class, 'eloquent']);
